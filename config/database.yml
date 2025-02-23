@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres  
+  password: Hari@10386
+  host: localhost
+
+development:
+  <<: *default
+  database: super_speciality_hospital_development
+
+test:
+  <<: *default
+  database: super_speciality_hospital_test
+
+production:
+  <<: *default
+  database: super_speciality_hospital_production
+  username: super_speciality_hospital
+  password: <%= ENV['SUPER_SPECIALITY_HOSPITAL_DATABASE_PASSWORD'] %>

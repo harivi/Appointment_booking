@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Select a Doctor</title>
+    <link rel="stylesheet" href="<%= asset_path 'styles.css' %>">
+    <script>
+        function updateDoctors() {
+            var specialty = document.getElementById("specialty").value;
+            var doctorDropdown = document.getElementById("doctor");
+            var doctors = JSON.parse('<%= raw @doctors.to_json %>');
+
+            doctorDropdown.innerHTML = "<option value=''>Select a Doctor</option>";
+            doctors.forEach(function(doctor) {
+                if (doctor.specialty === specialty) {
+                    var option = document.createElement("option");
+                    option.value = doctor.id;
+                    option.textContent = doctor.name;
+                    doctorDropdown.appendChild(option);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Doctor</h1>
+        <form action="/review" method="get">
+            <p>
+                <label for="specialty">Specialization:</label>
+                <select id="specialty" name="specialty" required onchange="updateDoctors()">
+                    <option value="">Select a Specialization</option>
+                    <% @specialties.each do |specialty| %>
+                        <option value="<%= specialty %>"><%= specialty %></option>
+                    <% end %>
+                </select>
+            </p>
+
+            <p>
+                <label for="doctor">Doctor:</label>
+                <select id="doctor" name="doctor_id" required>
+                    <option value="">Select a Doctor</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="appointment_date">Select Date & Time:</label>
+                <input type="datetime-local" name="appointment_date" required>
+            </p>
+
+            <p><button type="submit" class="btn">Check the Details</button></p>
+        </form>
+    </div>
+</body>
+</html>

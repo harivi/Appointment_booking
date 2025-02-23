@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Review Your Details</title>
+    <link rel="stylesheet" href="<%= asset_path 'styles.css' %>">
+</head>
+<body>
+    <div class="container">
+        <h1>Review Your Details</h1>
+        <p><strong>Name:</strong> <%= @patient.name %></p>
+        <p><strong>Phone:</strong> <%= @patient.phone %></p>
+        <p><strong>Email:</strong> <%= @patient.email %></p>
+        <p><strong>Specialization:</strong> <%= @doctor.specialty %></p>
+        <p><strong>Doctor:</strong> <%= @doctor.name %></p>
+        <p><strong>Appointment Date & Time:</strong> <%= @appointment_date %></p>
+
+        <form action="<%= appointments_path %>" method="post">
+            <input type="hidden" name="patient_id" value="<%= @patient.id %>">
+            <input type="hidden" name="doctor_id" value="<%= @doctor.id %>">
+            <input type="hidden" name="appointment_date" value="<%= @appointment_date %>">
+            <button type="submit" class="btn">Book Appointment</button>
+        </form>
+    </div>
+</body>
+</html>
+

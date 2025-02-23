@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Your Appointments</title>
+    <link rel="stylesheet" href="<%= asset_path 'styles.css' %>">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Appointments</h1>
+
+        <% if @appointments.any? %>
+            <table>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Doctor</th>
+                    <th>Specialization</th>
+                    <th>Appointment Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <% @appointments.each do |appointment| %>
+                    <tr>
+                        <td><%= appointment.patient.name %></td>
+                        <td><%= appointment.doctor.name %></td>
+                        <td><%= appointment.doctor.specialty %></td>
+                        <td><%= appointment.appointment_date.strftime("%B %d, %Y %I:%M %p") %></td>
+                        <td><%= appointment.status %></td>
+                        <td>
+                            <% if appointment.status == "Scheduled" && appointment.appointment_date > Time.current %>
+                                <form action="<%= appointment_path(appointment) %>" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn-cancel">Cancel</button>
+                                </form>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            </table>
+        <% else %>
+            <p>No appointments found.</p>
+        <% end %>
+    </div>
+</body>
+</html>

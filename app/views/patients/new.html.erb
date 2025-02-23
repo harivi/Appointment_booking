@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Enter Your Details</title>
+    <link rel="stylesheet" href="<%= asset_path 'styles.css' %>">
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Your Details</h1>
+        <%= form_with model: @patient, url: patients_path, method: :post do |f| %>
+            <p><%= f.label :name %> <%= f.text_field :name, required: true %></p>
+            <p><%= f.label :phone %> <%= f.text_field :phone, required: true %></p>
+            <p><%= f.label :email %> <%= f.email_field :email, required: true %></p>
+            <p><%= f.submit "Select a Doctor", class: "btn" %></p>
+        <% end %>
+    </div>
+</body>
+</html>
