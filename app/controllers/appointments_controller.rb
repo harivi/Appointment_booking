@@ -34,4 +34,4 @@ class AppointmentsController < ApplicationController
   def appointment_params
     params.permit(:patient_id, :doctor_id, :appointment_date)
   end
-end  # ✅ Correctly placed 'end'
+end  
